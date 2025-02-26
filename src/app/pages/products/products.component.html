@@ -1,0 +1,39 @@
+<section>
+    <h2 class="text-2xl mb-2  dark:text-green-400">Popular Products <span>:</span></h2>
+    <div class="mb-3 w-1/2 mx-auto flex items-center space-x-1">
+        <label for="search" class="mb-2 font-medium text-gray-900 dark:text-white text-1xl">Search:</label>
+        <input [(ngModel)]="search" type="text" id="search"
+            class="bg-white border w-[90%] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        @for (item of product | search:search; track item.id) {
+        <div class="card border border-green-400/50 rounded-md overflow-hidden shadow relative dark:border-green-600/50 dark:bg-gray-700">
+            <div [routerLink]='["/details",item._id]'>
+                <div class="card-img">
+                    <img [src]="item.imageCover" class="w-full object-contain h-[250px] dark:brightness-75" [alt]="item.title" />
+                </div>
+                <div class="card-body px-2">
+                    <h4 class="text-green-500 text-xs dark:text-green-400">{{item.category.name}}</h4>
+                    <h3 class="font-medium dark:text-gray-300">{{item.title.split(" ",2).join(' ')}}</h3>
+                    <div class="flex justify-between items-center">
+                        <span class="dark:text-gray-300">{{item.price}} EGP</span>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-300"></i>
+                            <span class="text-gray-500 dark:text-gray-400">{{item.ratingsAverage}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between w-full">
+                <button (click)="addcart(item._id)"
+                    class="bg-green-600 text-white py-2 px-10 border rounded w-[90%] mx-auto block dark:bg-green-700 dark:hover:bg-green-600">
+                    Add To Cart
+                </button>
+                <span class="text-2xl cursor-pointer" (click)="addwish(item._id)">
+                  <i class="fa-solid fa-heart" [ngClass]="{'text-red-600': isInWishlist(item._id)}"></i>
+                </span>
+            </div>
+        </div>
+        }
+    </div>
+</section>
