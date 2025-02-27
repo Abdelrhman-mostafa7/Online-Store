@@ -1,0 +1,107 @@
+<nav class="bg-gray-200 border-gray-200 dark:bg-gray-900 mb-5">
+  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto px-4 py-2">
+    <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/images/freshcart-logo.svg" alt="FreshCart Logo" class="dark:brightness-75">
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15" />
+      </svg>
+    </button>
+    <div class="hidden w-full md:flex md:w-auto md:flex-grow md:justify-center" id="navbar-default">
+      @if (isligin()) {
+      <ul
+        class="capitalize flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-2 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+          <a routerLink="/home" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.home'| translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/products" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.products'| translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/Wishlist" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.Wishlist'| translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/categories" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.categories'| translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/brands" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.brands'| translate}}</a>
+        </li>
+      </ul>
+      }
+    </div>
+    <div class="hidden w-full md:flex md:w-auto md:justify-end" id="navbar-default">
+      <ul
+        class="capitalize flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-2 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        @if (!isligin()) {
+        <li>
+          <a routerLink="/login" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.login'| translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/register" routerLinkActive="bg-green-700 text-white"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.register'| translate}}</a>
+        </li>
+        }
+        @else {
+
+        <li>
+          <a routerLink="/cart" routerLinkActive="text-green-700"
+            class="block py-2 px-3 text-gray-700 rounded-sm text-2xl relative dark:text-gray-300" aria-current="page">
+            <i class="fas fa-shopping-cart"></i>
+            <span
+              class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300 absolute top-0 left-0">{{countcart}}</span>
+          </a>
+        </li>
+        <li>
+          <a role="button" (click)="authService.logout()"
+            class="block py-2 px-3 text-gray-700 rounded-sm dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-current="page">{{'navbar.logout'| translate}}</a>
+        </li>
+        }
+        <button (click)="toggleTheme()" class="p-2 rounded-lg dark:bg-green-600">
+          {{ themeService.getTheme() === 'dark' ? '🌞' : '🌙' }}
+        </button>
+        
+        <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500"
+          data-dropdown-trigger="hover"
+          class="focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          type="button">{{'navbar.lang'| translate}}<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 4 4 4-4" />
+          </svg>
+        </button>
+        <div id="dropdownDelay"
+          class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
+            <li>
+              <a [class.hidden]="currentLang('en')" (click)="chang('en')" role="button"
+                class="block px-4 py-2 bg-green-400 hover:bg-green-500 dark:hover:bg-gray-600 dark:hover:text-white">EN</a>
+            </li>
+            <li>
+              <a [class.hidden]="currentLang('ar')" (click)="chang('ar')" role="button"
+                class="block px-4 py-2 bg-green-400 hover:bg-green-500 dark:hover:bg-gray-600 dark:hover:text-white">AR</a>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

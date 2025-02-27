@@ -1,0 +1,23 @@
+<section class="w-1/2 mx-auto shadow border bg-white p-4 rounded my-4 dark:bg-gray-800 dark:border-gray-700">
+    <h1 class="text-2xl mb-4 dark:text-white">Checkout Now</h1>
+    <form [formGroup]="checkout" (ngSubmit)="sumbiteform()">
+        <div class="mb-1">
+            <label for="details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Details</label>
+            <input formControlName="details" type="text" id="details" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div class="mb-1">
+            <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+            <input formControlName="city" type="text" id="city" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div class="mb-1">
+            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+            <input formControlName="phone" type="text" id="phone" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <button type="submit" class="disabled:bg-gray-800 bg-green-700 rounded px-10 py-2 text-white border dark:bg-green-600 dark:hover:bg-green-700">
+            Payment
+        </button>
+    </form>
+</section>

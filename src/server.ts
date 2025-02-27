@@ -15,19 +15,7 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
-
-/**
- * Serve static files from /browser
+ * تقديم الملفات الثابتة من مجلد `browser`
  */
 app.use(
   express.static(browserDistFolder, {
@@ -38,7 +26,30 @@ app.use(
 );
 
 /**
- * Handle all other requests by rendering the Angular application.
+ * دعم التصيير المسبق لبعض القيم المحددة لـ Checkout/:id و details/:id
+ */
+const getPrerenderParams: Record<string, () => string[]> = {
+  'Checkout': () => ['100', '200', '300'], // معرفات الطلبات التي سيتم تصييرها مسبقًا
+  'details': () => ['1', '2', '3'],        // معرفات المنتجات التي سيتم تصييرها مسبقًا
+};
+
+// دعم التصيير المسبق لهذه المسارات فقط
+Object.keys(getPrerenderParams).forEach(route => {
+  getPrerenderParams[route]().forEach((param: string) => {
+    app.get(`/${route}/${param}`, (req, res) => {
+      angularApp.handle(req).then(response => {
+        if (response) {
+          writeResponseToNodeResponse(response, res);
+        } else {
+          res.status(404).send('Not Found');
+        }
+      }).catch(error => res.status(500).send(error.message));
+    });
+  });
+});
+
+/**
+ * معالجة جميع الطلبات الأخرى من خلال Angular
  */
 app.use('/**', (req, res, next) => {
   angularApp
@@ -50,17 +61,16 @@ app.use('/**', (req, res, next) => {
 });
 
 /**
- * Start the server if this module is the main entry point.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
+ * تشغيل السيرفر إذا كان هذا هو الملف الرئيسي
  */
 if (isMainModule(import.meta.url)) {
   const port = process.env['PORT'] || 4000;
   app.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`🚀 السيرفر يعمل على: http://localhost:${port}`);
   });
 }
 
 /**
- * The request handler used by the Angular CLI (dev-server and during build).
+ * معالج الطلبات المستخدم بواسطة Angular CLI
  */
 export const reqHandler = createNodeRequestHandler(app);

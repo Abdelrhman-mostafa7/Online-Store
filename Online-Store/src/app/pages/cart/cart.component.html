@@ -1,0 +1,37 @@
+<section class="bg-gray-50 border rounded p-4 shadow w-[75%] mx-auto dark:bg-gray-800 dark:border-gray-700">
+    <h1 class="text-center text-green-600 text-3xl dark:text-green-400">Shop Cart</h1>
+    <h3 class="text-green-600 dark:text-green-400">Total Price :{{cartdetails.totalCartPrice}} EGP</h3>
+    <button (click)="clearitemcart()" class="text-xs bg-red-900 text-white rounded px-6 py-1 block ms-auto dark:bg-red-700">
+        Clear Cart
+    </button>
+    @for (item of cartdetails.products; track item.product._id) {
+        <div class="grid md:grid-cols-[10%,minmax(0,1fr)] gap-4">
+            <!-- img -->
+            <div>
+                <img [src]="item.product.imageCover" class="w-full h-[100px] mt-2 object-contain dark:brightness-75" [alt]="item.product.title" />
+            </div>
+            <!-- info -->
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="dark:text-gray-300">{{item.product.title}}</h3>
+                    <h4 class="text-green-500 dark:text-green-400">price:{{item.price}} EGP</h4>
+                    <button (click)="removeitemcart(item.product._id)" class="dark:text-gray-300">
+                        <i class="fas fa-trash-can text-green-600 dark:text-green-400"></i> Remove
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button (click)="updataitemcart(item.product._id ,item.count+1)" class="text-3xl text-green-600 dark:text-green-400">
+                        <i class="fa-regular fa-square-plus"></i>
+                    </button>
+                    <span class="dark:text-gray-300">{{item.count}}</span>
+                    <button (click)="updataitemcart(item.product._id ,item.count-1 )" class="text-3xl text-green-600 dark:text-green-400">
+                        <i class="fa-regular fa-square-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+    <button [routerLink]="['/Checkout',cartdetails._id]" class="bg-green-600 mt-2 text-white py-2 px-10 border rounded hover:bg-green-400 transition-colors duration-150 dark:bg-green-700 dark:hover:bg-green-600">
+        Payment
+    </button>
+</section>

@@ -1,0 +1,48 @@
+<section>
+    <h2 class="text-3xl my-4 text-center dark:text-green-400">All Brands</h2>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 text-center">
+        @for (item of branddata; track item._id) {
+        <div (click)="openModal(item._id)" class="card border border-gray-700 rounded-md overflow-hidden shadow-lg
+            relative transition-all duration-700 transform
+            hover:shadow-md hover:shadow-blue-500 hover:scale-105 cursor-pointer dark:border-gray-600 dark:bg-gray-700">
+            <div>
+                <img [src]="item.image" class="w-full object-contain h-[250px] dark:brightness-75" alt="">
+                <h3 class="text-green-600 dark:text-green-400">{{item.name}}</h3>
+            </div>
+        </div>
+        }
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="brand-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-800">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    {{selectedBrand?.name}}
+                </h3>
+                <button type="button" (click)="closeModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <img [src]="selectedBrand?.image" alt="{{selectedBrand?.name}}" class="w-full h-64 object-contain mb-4 dark:brightness-75">
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    {{selectedBrand?.description}}
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button (click)="closeModal()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

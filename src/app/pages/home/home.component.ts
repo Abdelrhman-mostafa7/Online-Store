@@ -5,13 +5,11 @@ import { CategoryService } from '../../core/services/categories/category.service
 import { Icategory } from '../../shared/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { FormsModule } from '@angular/forms';
-import { SearchPipe } from '../../pipes/search/search.pipe';
-import { RouterLink } from '@angular/router';
 import { ProductsComponent } from "../products/products.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselModule, FormsModule, SearchPipe, RouterLink, ProductsComponent],
+  imports: [CarouselModule, FormsModule, ProductsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

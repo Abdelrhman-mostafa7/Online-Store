@@ -1,0 +1,38 @@
+<section class="dark:bg-gray-800 mb-5">
+    <div class="grid md:grid-cols-[70%_minmax(0,1fr)] grid-cols-1">
+      <div>
+        <owl-carousel-o [options]="custMainpsliader">
+            <ng-template carouselSlide>
+                <img src="/images/slider-image-1.jpeg" class="w-full h-[300px] md:h-[300px] sm:h-[100px] dark:brightness-75" alt="">
+            </ng-template> 
+            <ng-template carouselSlide>
+                <img src="/images/slider-image-2.jpeg" class="w-full h-[300px] md:h-[300px] sm:h-[100px] dark:brightness-75" alt="">
+            </ng-template>  
+            <ng-template carouselSlide>
+                <img src="/images/slider-image-3.jpeg" class="w-full h-[300px] md:h-[300px] sm:h-[100px] dark:brightness-75" alt="">
+            </ng-template> 
+        </owl-carousel-o>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <img src="/images/slider-2.jpeg" class="w-full h-[150px] md:h-[150px] sm:h-[100px] dark:brightness-75" alt="" />
+        <img src="/images/grocery-banner-2.jpeg" class="w-full h-[150px] md:h-[150px] sm:h-[100px] dark:brightness-75" alt="" />
+      </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <h2 class="text-2xl mb-2  dark:text-green-400">Popular Categories <span>:</span></h2>
+
+    <owl-carousel-o [options]="customOptions">
+        @for (item of category; track item._id) {
+            <ng-template carouselSlide>
+                <div class="dark:bg-gray-700">
+                    <img [src]="item.image" class="w-full h-[250px] dark:brightness-75" alt="">
+                    <h3 class="text-green-600 dark:text-green-400">{{item.name}}</h3>
+                </div>
+            </ng-template>
+        }
+    </owl-carousel-o>
+</section>
+
+<app-products></app-products>

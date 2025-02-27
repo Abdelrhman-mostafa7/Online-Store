@@ -1,0 +1,41 @@
+<section class="bg-gray-50 border rounded p-4 shadow w-[75%] mx-auto dark:bg-gray-800 dark:border-gray-700">
+  <h1 class="text-center text-green-600 text-3xl dark:text-green-400">All Orders</h1>
+  @for (order of AllOrdersList; track $index) {
+  <div class="border p-5 mb-3 dark:border-gray-600">
+    @for (item of order.cartItems ; track $index) {
+    <div class="grid md:grid-cols-[10%,minmax(0,1fr)] gap-4">
+      <div>
+        <img
+          [src]="item.product.imageCover"
+          class="w-full h-[100px] object-contain dark:brightness-75"
+          alt=""
+        />
+      </div>
+
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="text-lg text-green-600 dark:text-green-400">{{ item.product.title }}</h3>
+          <p class="uppercase mb-0 dark:text-gray-300">count: {{ item.count }}</p>
+          <p class="uppercase mb-0 dark:text-gray-300">price: {{ item.price }}</p>
+        </div>
+
+        <div class="py-3 order-details mt-4 w-1/2 mx-auto">
+          <p class="uppercase mb-0 p-1 dark:text-gray-300">
+            is delivered:
+            <span class="bg-red-500 text-white px-2 py-1 rounded dark:bg-red-600">No</span>
+          </p>
+          <p class="uppercase mb-0 p-1 dark:text-gray-300">
+            is paid:
+            <span class="bg-green-500 text-white px-2 py-1 rounded dark:bg-green-600">Yes</span>
+          </p>
+          <p class="uppercase mb-0 p-1 dark:text-gray-300">
+            payment type method:
+            <span class="text-green-600 dark:text-green-400">{{ order.paymentMethodType }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</section>

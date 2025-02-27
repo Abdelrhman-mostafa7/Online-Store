@@ -10,7 +10,7 @@ import { ThemeService } from '../../core/services/them/them.service';
   selector: 'app-navbar',
   imports: [RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
     private readonly cartService = inject(CartService);

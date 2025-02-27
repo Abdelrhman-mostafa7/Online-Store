@@ -36,7 +36,9 @@
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss"
             ],
-            "scripts": ["./node_modules/flowbite/dist/flowbite.min.js"],
+            "scripts": [
+              "./node_modules/flowbite/dist/flowbite.min.js"
+            ],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -101,6 +103,27 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/",
+              "/home",
+              "/brands",
+              "/cart",
+              "/categories",
+              "/products",
+              "/wishlist",
+              "/allorders",
+              "/Checkout/100",
+              "/Checkout/200",
+              "/Checkout/300",
+              "/details/1",
+              "/details/2",
+              "/details/3"
+            ]
           }
         }
       }
